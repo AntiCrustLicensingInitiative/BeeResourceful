@@ -45,16 +45,15 @@ object BeeResourceful : ModInitializer {
             Artifice.registerAssets(Identifier("beeresourceful", "br_potion_data")){ pack ->
                 pack.addTranslations(Identifier("beeresourceful", "en_us")) { translations ->
                     Potions.PotionFlavors.forEach { potion ->
-                        val id = Identifier("beeresourceful", potion.key + "_nectar")
+                        val id = Identifier("beeresourceful", "potion_"+potion.key + "_nectar")
 
-                        translations.entry("item.beeresourceful."+id.path, id.path.split("_").joinToString(" ") { it.capitalize() })
+                        translations.entry("item.beeresourceful."+id.path, id.path.replace("potion_", "potion_of_").split("_").joinToString(" ") { if (it != "of") it.capitalize() else it })
 
                         pack.addItemModel(id) {
-                            it.parent(Identifier("minecraft", "generated"))
-                            it.texture("layer0", Identifier("beeresourceful", "potion_nectar"))
+                            it.parent(Identifier("minecraft", "item/generated"))
+                            it.texture("layer0", Identifier("beeresourceful", "item/potion_nectar"))
                         }
 
-                        println("Created item model and translation for $id.")
                     }
                 }
             }

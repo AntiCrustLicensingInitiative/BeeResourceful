@@ -59,13 +59,6 @@ dependencies {
 	modImplementation "com.lettuce.fudge:artifice:${project.artifice_version}"
 	include "com.lettuce.fudge:artifice:${project.artifice_version}"
 
-	include "curse.maven:oysters:2854625"
-	include "curse.maven:mobz:2853477"
-	include "curse.maven:equipz:2844678"
-	include "net.fabricmc.fabric-api:fabric-api:${project.api_version}"
-	include "io.github.alloffabric:BeeProductive:${project.bp_version}"
-	include "TechReborn:TechReborn-1.15:${project.tr_version}"
-
 	// Kotlin
 	modImplementation "net.fabricmc:fabric-language-kotlin:$kotlin_version_old+build.1"
 	include "net.fabricmc:fabric-language-kotlin:$kotlin_version_old+build.1"

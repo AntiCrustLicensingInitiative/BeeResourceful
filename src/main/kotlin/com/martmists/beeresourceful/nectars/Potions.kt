@@ -3,11 +3,10 @@ package com.martmists.beeresourceful.nectars
 import com.martmists.beeresourceful.BeeResourceful
 import com.martmists.beeresourceful.entities.ChanceDropFlavor
 import io.github.alloffabric.beeproductive.api.HoneyFlavor
-import io.github.alloffabric.beeproductive.init.BeeProdItems
-import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.potion.PotionUtil
+import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
 
 object Potions {
