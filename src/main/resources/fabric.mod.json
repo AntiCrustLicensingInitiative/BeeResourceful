@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "beeresourceful",
+  "version": "${version}",
+  "name": "Bee Productive Resources",
+  "description": "Adds nectars for Bee Productive",
+  "authors": [
+    "Martmists"
+  ],
+  "contact": {
+    "sources": "https://dilaton.martmists.com/martmists/beeresourceful"
+  },
+  "license": "MIT",
+  "icon": "assets/bpr/icon.png",
+  "entrypoints": {
+    "main": [
+      {
+        "value": "com.martmists.beeresourceful.BeeResourceful",
+        "adapter": "kotlin"
+      }
+    ]
+  },
+  "mixins": [
+    "bpr.mixin.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.4.0",
+    "fabric": "*",
+    "beeproductive": "*",
+    "fabric-language-kotlin": "*"
+  }
+}

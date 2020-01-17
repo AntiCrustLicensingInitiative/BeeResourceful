@@ -1,0 +1,107 @@
+buildscript {
+	ext.kotlin_version = '1.3.61'
+	ext.kotlin_version_old = '1.3.60'
+
+	dependencies {
+		classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+		classpath "com.wynprice.cursemaven:CurseMaven:2.1.1"
+	}
+	repositories {
+		mavenCentral()
+		jcenter()
+		maven {
+			url "https://plugins.gradle.org/m2/"
+		}
+	}
+}
+
+plugins {
+	id 'fabric-loom' version '0.2.6-SNAPSHOT'
+	id "com.wynprice.cursemaven" version "2.1.1"
+}
+
+apply plugin: "kotlin"
+apply plugin: "idea"
+
+compileKotlin {
+	sourceCompatibility = JavaVersion.VERSION_1_8
+	targetCompatibility = JavaVersion.VERSION_1_8
+	kotlinOptions {
+		jvmTarget = "1.8"
+	}
+}
+
+archivesBaseName = project.archives_base_name
+version = project.mod_version
+group = project.maven_group
+
+configurations {
+	compileAndInclude {
+		extendsFrom compile
+		extendsFrom include
+	}
+}
+
+dependencies {
+	// Base dependencies
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	mappings "net.fabricmc:yarn:${project.yarn_mappings}"
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.api_version}"
+
+	// Mods
+	modImplementation "io.github.alloffabric:BeeProductive:${project.bp_version}"
+	modImplementation "TechReborn:TechReborn-1.15:${project.tr_version}"
+	modImplementation "io.github.cottonmc:LibCD:${project.libcd_version}"
+	modImplementation "curse.maven:oysters:2854625"
+	modImplementation "curse.maven:mobz:2853477"
+	modImplementation "curse.maven:equipz:2844678"
+	modImplementation "com.lettuce.fudge:artifice:${project.artifice_version}"
+	include "com.lettuce.fudge:artifice:${project.artifice_version}"
+
+	include "curse.maven:oysters:2854625"
+	include "curse.maven:mobz:2853477"
+	include "curse.maven:equipz:2844678"
+	include "net.fabricmc.fabric-api:fabric-api:${project.api_version}"
+	include "io.github.alloffabric:BeeProductive:${project.bp_version}"
+	include "TechReborn:TechReborn-1.15:${project.tr_version}"
+
+	// Kotlin
+	modImplementation "net.fabricmc:fabric-language-kotlin:$kotlin_version_old+build.1"
+	include "net.fabricmc:fabric-language-kotlin:$kotlin_version_old+build.1"
+}
+
+processResources {
+	inputs.property "version", project.version
+
+	from(sourceSets.main.resources.srcDirs) {
+		include "fabric.mod.json"
+		expand "version": project.version
+	}
+
+	from(sourceSets.main.resources.srcDirs) {
+		exclude "fabric.mod.json"
+	}
+}
+
+tasks.withType(JavaCompile) {
+	options.encoding = "UTF-8"
+}
+
+jar {
+	from "LICENSE"
+}
+
+repositories {
+	mavenCentral()
+	jcenter()
+	maven {
+		url "http://server.bbkr.space:8081/artifactory/libs-release/"
+	}
+	maven {
+		url "https://maven.abusedmaster.xyz"
+	}
+	maven {
+		url "https://maven.swordglowsblue.com"
+	}
+}
