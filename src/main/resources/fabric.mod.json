@@ -11,7 +11,7 @@
     "sources": "https://dilaton.martmists.com/martmists/beeresourceful"
   },
   "license": "MIT",
-  "icon": "assets/bpr/icon.png",
+  "icon": "assets/beeresourceful/icon.png",
   "entrypoints": {
     "main": [
       {
@@ -19,6 +19,12 @@
         "adapter": "kotlin"
       }
     ]
+  },
+  "custom": {
+    "waila:plugins": {
+      "id": "beeresourceful:bpdata_plugin",
+      "initializer": "com.martmists.beeresourceful.waila.BPDataPlugin"
+    }
   },
   "depends": {
     "fabricloader": ">=0.4.0",

@@ -16,7 +16,7 @@ buildscript {
 }
 
 plugins {
-	id 'fabric-loom' version '0.2.6-SNAPSHOT'
+	id 'fabric-loom' version '0.2.7-SNAPSHOT'
 	id "com.wynprice.cursemaven" version "2.1.1"
 }
 
@@ -57,7 +57,10 @@ dependencies {
 	modImplementation "curse.maven:mobz:2853477"
 	modImplementation "curse.maven:equipz:2844678"
 	modImplementation "com.lettuce.fudge:artifice:${project.artifice_version}"
+	modImplementation "mcp.mobius.waila:Hwyla:${project.hwyla_version}"
 	include "com.lettuce.fudge:artifice:${project.artifice_version}"
+
+	include "mcp.mobius.waila:Hwyla:${project.hwyla_version}"
 
 	// Kotlin
 	modImplementation "net.fabricmc:fabric-language-kotlin:$kotlin_version_old+build.1"
@@ -96,5 +99,8 @@ repositories {
 	}
 	maven {
 		url "https://maven.swordglowsblue.com"
+	}
+	maven {
+		url "http://tehnut.info/maven"
 	}
 }
