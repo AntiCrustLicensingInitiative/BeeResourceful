@@ -66,7 +66,7 @@ class BPDataPlugin : IWailaPlugin {
             val component = BeeProductive.BEE_COMPONENT.get(t as BeeEntity)
             data.putString(
                     "beeproductive_flavor",
-                    BeeProductive.NECTARS.getId(component.nectar).also{ println(it) }.toString()
+                    BeeProductive.NECTARS.getId(component.nectar).toString()
             )
         }
     }

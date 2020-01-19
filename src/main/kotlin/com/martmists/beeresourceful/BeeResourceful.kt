@@ -3,14 +3,14 @@ package com.martmists.beeresourceful
 import com.martmists.beeresourceful.ext.registerItem
 import com.martmists.beeresourceful.ext.registerNectar
 import com.martmists.beeresourceful.libcd.CustomBPNectar
+import com.martmists.beeresourceful.libcd._InternalNectarRecipeConfiguration
 import com.martmists.beeresourceful.nectars.*
+import com.martmists.beeresourceful.nectars.compat.*
 import com.swordglowsblue.artifice.api.Artifice
 import io.github.alloffabric.beeproductive.BeeProductive
 import io.github.alloffabric.beeproductive.api.HoneyFlavor
 import io.github.alloffabric.beeproductive.api.Nectar
 import io.github.alloffabric.beeproductive.api.hive.Beehive
-import io.github.alloffabric.beeproductive.init.BeeProdItems
-import io.github.alloffabric.beeproductive.item.NectarItem
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.loader.api.FabricLoader
@@ -69,14 +69,15 @@ object BeeResourceful : ModInitializer {
             MobZ.init()
         }
 
-        if (FabricLoader.getInstance().isModLoaded("libcd")){
+        if (FabricLoader.getInstance().isModLoaded("libcd")) {
             logger.info("[Bee Resourceful] Adding LibCD tweaker...")
             CustomBPNectar.__register()
+            _InternalNectarRecipeConfiguration.__register()
             logger.warn(
                     "NOTE: The LibCD tweaker adds the items to the registry! " +
-                    "If you create custom Nectars in one world, these will stay around " +
-                    "in others until you restart your game! " +
-                    "(This feature also may not work reliably on servers)")
+                            "If you create custom Nectars in one world, these will stay around " +
+                            "in others until you restart your game! " +
+                            "(This feature also may not work reliably on servers)")
         }
 
         logger.info("[Bee Resourceful] Done loading. Enjoy!")
@@ -91,6 +92,13 @@ object BeeResourceful : ModInitializer {
     }
 
     fun registerFlavor(name: String, flavor: HoneyFlavor): HoneyFlavor {
-        return Registry.register(BeeProductive.HONEY_FLAVORS, Identifier("beeresourceful", name), flavor).also { it.registerNectar(name) }
+        return Registry.register(BeeProductive.HONEY_FLAVORS, Identifier("beeresourceful", name), flavor).also {
+            it.registerNectar(name)  // Registers the item before we add the crafting recipe lol
+            registerRecipe(name, flavor)
+        }
+    }
+
+    fun registerRecipe(name: String, flavor: HoneyFlavor) {
+        _InternalNectarRecipeConfiguration.flavors[name] = flavor
     }
 }

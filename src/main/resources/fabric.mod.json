@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "beeresourceful",
   "version": "${version}",
-  "name": "Bee Productive Resources",
+  "name": "Bee Resourceful",
   "description": "Adds nectars for Bee Productive",
   "authors": [
     "Martmists"
@@ -30,6 +30,11 @@
     "fabricloader": ">=0.4.0",
     "fabric": "*",
     "beeproductive": "*",
+    "libcd": "*",
     "fabric-language-kotlin": "*"
+  },
+  "suggests": {
+    "mobz": "*",
+    "oysters": "*"
   }
 }

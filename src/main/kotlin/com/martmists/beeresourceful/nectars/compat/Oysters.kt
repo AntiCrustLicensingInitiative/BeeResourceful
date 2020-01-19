@@ -1,4 +1,4 @@
-package com.martmists.beeresourceful.nectars
+package com.martmists.beeresourceful.nectars.compat
 
 import com.martmists.beeresourceful.BeeResourceful
 import com.martmists.beeresourceful.entities.ChanceDropFlavor

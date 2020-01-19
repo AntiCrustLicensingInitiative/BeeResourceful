@@ -60,8 +60,6 @@ dependencies {
 	modImplementation "mcp.mobius.waila:Hwyla:${project.hwyla_version}"
 	include "com.lettuce.fudge:artifice:${project.artifice_version}"
 
-	include "mcp.mobius.waila:Hwyla:${project.hwyla_version}"
-
 	// Kotlin
 	modImplementation "net.fabricmc:fabric-language-kotlin:$kotlin_version_old+build.1"
 	include "net.fabricmc:fabric-language-kotlin:$kotlin_version_old+build.1"
@@ -102,5 +100,8 @@ repositories {
 	}
 	maven {
 		url "http://tehnut.info/maven"
+	}
+	maven {
+		url 'https://jitpack.io'
 	}
 }
