@@ -13,9 +13,8 @@ import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
 import net.minecraft.world.World
-import java.awt.Dimension
 
-class BPDataPlugin : IWailaPlugin {
+class BeeDataPlugin : IWailaPlugin {
     object BeeBlockComponentProvider : IComponentProvider {
         override fun appendTail(tooltip: MutableList<Text>, accessor: IDataAccessor, config: IPluginConfig) {
             tooltip as ITaggableList<Identifier, Text>

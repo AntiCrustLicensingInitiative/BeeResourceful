@@ -1,2 +1,2 @@
-var configurator = libcd.require("beeresourceful.libcd._InternalNectarRecipeConfiguration");
-configurator.___registerAllRecipes();
+var configurator = libcd.require("beeresourceful.libcd.RecipeCreator");
+configurator.___registerRecipes();

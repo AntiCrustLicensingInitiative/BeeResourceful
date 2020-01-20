@@ -1,14 +1,13 @@
 package com.martmists.beeresourceful.nectars.compat
 
 import com.martmists.beeresourceful.BeeResourceful
-import com.martmists.beeresourceful.entities.ChanceDropFlavor
+import com.martmists.beeresourceful.entities.SimpleFlavor
 import net.mobz.glomod
-import techreborn.init.TRContent
 
 object MobZ {
-    val ENCHANTED_GOLD_FLAVOR = BeeResourceful.registerFlavor("enchanted_gold", ChanceDropFlavor(glomod.BOSSBARREN, chanceSheared = 0.1))
-    val WEIRD_FLAVOR = BeeResourceful.registerFlavor("weird", ChanceDropFlavor(glomod.WEIRDINGOT, chanceSheared = 0.3))
-    val METAL_FLAVOR = BeeResourceful.registerFlavor("metal", ChanceDropFlavor(glomod.HARDENEDMETAL, chanceSheared = 0.2))
+    val ENCHANTED_GOLD_FLAVOR = BeeResourceful.registerFlavor("enchanted_gold", SimpleFlavor.bySheared(glomod.BOSSBARREN))
+    val WEIRD_FLAVOR = BeeResourceful.registerFlavor("weird", SimpleFlavor.bySheared(glomod.WEIRDINGOT))
+    val METAL_FLAVOR = BeeResourceful.registerFlavor("metal", SimpleFlavor.bySheared(glomod.HARDENEDMETAL))
 
     fun init() {}
 }

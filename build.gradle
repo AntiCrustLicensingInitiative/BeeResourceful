@@ -49,16 +49,27 @@ dependencies {
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.api_version}"
 
-	// Mods
+	// Required mods
 	modImplementation "io.github.alloffabric:BeeProductive:${project.bp_version}"
-	modImplementation "TechReborn:TechReborn-1.15:${project.tr_version}"
 	modImplementation "io.github.cottonmc:LibCD:${project.libcd_version}"
-	modImplementation "curse.maven:oysters:2854625"
-	modImplementation "curse.maven:mobz:2853477"
-	modImplementation "curse.maven:equipz:2844678"
 	modImplementation "com.lettuce.fudge:artifice:${project.artifice_version}"
-	modImplementation "mcp.mobius.waila:Hwyla:${project.hwyla_version}"
 	include "com.lettuce.fudge:artifice:${project.artifice_version}"
+
+	// APIs
+	modCompileOnly "TechReborn:TechReborn-1.15:${project.tr_version}"
+	modCompileOnly "curse.maven:oysters:2854625"
+	modCompileOnly "curse.maven:mobz:2853477"
+	modCompileOnly "curse.maven:equipz:2844678"
+	modCompileOnly "mcp.mobius.waila:Hwyla:${project.hwyla_version}"
+
+	// Includes for testing
+	// modRuntime "TechReborn:TechReborn-1.15:${project.tr_version}"
+	// modRuntime "io.github.alloffabric:BeeProductive:${project.bp_version}"
+	// modRuntime "io.github.cottonmc:LibCD:${project.libcd_version}"
+	// modRuntime "curse.maven:oysters:2854625"
+	// modRuntime "curse.maven:mobz:2853477"
+	// modRuntime "curse.maven:equipz:2844678"
+	// include "mcp.mobius.waila:Hwyla:${project.hwyla_version}"
 
 	// Kotlin
 	modImplementation "net.fabricmc:fabric-language-kotlin:$kotlin_version_old+build.1"

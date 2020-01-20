@@ -2,10 +2,13 @@ package com.martmists.beeresourceful
 
 import com.martmists.beeresourceful.ext.registerItem
 import com.martmists.beeresourceful.ext.registerNectar
-import com.martmists.beeresourceful.libcd.CustomBPNectar
-import com.martmists.beeresourceful.libcd._InternalNectarRecipeConfiguration
-import com.martmists.beeresourceful.nectars.*
-import com.martmists.beeresourceful.nectars.compat.*
+import com.martmists.beeresourceful.libcd.CustomNectar
+import com.martmists.beeresourceful.libcd.RecipeCreator
+import com.martmists.beeresourceful.nectars.Potions
+import com.martmists.beeresourceful.nectars.Vanilla
+import com.martmists.beeresourceful.nectars.compat.MobZ
+import com.martmists.beeresourceful.nectars.compat.Oysters
+import com.martmists.beeresourceful.nectars.compat.TechReborn
 import com.swordglowsblue.artifice.api.Artifice
 import io.github.alloffabric.beeproductive.BeeProductive
 import io.github.alloffabric.beeproductive.api.HoneyFlavor
@@ -25,29 +28,23 @@ object BeeResourceful : ModInitializer {
 
     override fun onInitialize() {
         logger.info("[Bee Resourceful] loading items...")
-        if (FabricLoader.getInstance().isModLoaded("techreborn")) {
-            logger.info("[Bee Resourceful] Loading TR drops...")
-            VanillaAlt.init()
-            logger.info("[Bee Resourceful] Loading Vanilla[TR] drops...")
-            TechReborn.init()
-        } else {
-            logger.info("[Bee Resourceful] Loading Vanilla drops...")
-            Vanilla.init()
-        }
-        VanillaCommon.init()
+
+        logger.info("[Bee Resourceful] Adding Vanilla drops...")
+        Vanilla.init()
 
         logger.info("[Bee Resourceful] Adding potions...")
         Potions.init()
+        RecipeCreator.init()
 
         if (FabricLoader.getInstance().environmentType == EnvType.CLIENT) {
             logger.info("[Bee Resourceful] Adding Artifice resources...")
 
-            Artifice.registerAssets(Identifier("beeresourceful", "br_potion_data")){ pack ->
+            Artifice.registerAssets(Identifier("beeresourceful", "br_potion_data")) { pack ->
                 pack.addTranslations(Identifier("beeresourceful", "en_us")) { translations ->
                     Potions.PotionFlavors.forEach { potion ->
-                        val id = Identifier("beeresourceful", "potion_"+potion.key + "_nectar")
+                        val id = Identifier("beeresourceful", "potion_" + potion.key + "_nectar")
 
-                        translations.entry("item.beeresourceful."+id.path, id.path.replace("potion_", "potion_of_").split("_").joinToString(" ") { if (it != "of") it.capitalize() else it })
+                        translations.entry("item.beeresourceful." + id.path, id.path.replace("potion_", "potion_of_").split("_").joinToString(" ") { if (it != "of") it.capitalize() else it })
 
                         pack.addItemModel(id) {
                             it.parent(Identifier("minecraft", "item/generated"))
@@ -59,20 +56,24 @@ object BeeResourceful : ModInitializer {
             }
         }
 
-        if (FabricLoader.getInstance().isModLoaded("oysters")){
+        if (FabricLoader.getInstance().isModLoaded("techreborn")) {
+            logger.info("[Bee Resourceful] Adding TR drops...")
+            TechReborn.init()
+        }
+
+        if (FabricLoader.getInstance().isModLoaded("oysters")) {
             logger.info("[Bee Resourceful] Adding Oysters drops...")
             Oysters.init()
         }
 
-        if (FabricLoader.getInstance().isModLoaded("mobz")){
+        if (FabricLoader.getInstance().isModLoaded("mobz")) {
             logger.info("[Bee Resourceful] Adding MobZ drops...")
             MobZ.init()
         }
 
         if (FabricLoader.getInstance().isModLoaded("libcd")) {
             logger.info("[Bee Resourceful] Adding LibCD tweaker...")
-            CustomBPNectar.__register()
-            _InternalNectarRecipeConfiguration.__register()
+            CustomNectar.__register()
             logger.warn(
                     "NOTE: The LibCD tweaker adds the items to the registry! " +
                             "If you create custom Nectars in one world, these will stay around " +
@@ -84,7 +85,7 @@ object BeeResourceful : ModInitializer {
     }
 
     fun registerItem(name: String, item: Item): Item {
-        return Registry.register(Registry.ITEM, Identifier("beeresourceful", name+"_nectar"), item)
+        return Registry.register(Registry.ITEM, Identifier("beeresourceful", name + "_nectar"), item)
     }
 
     fun registerNectar(name: String, nectar: (BeeEntity, Beehive) -> Unit): Nectar {
@@ -93,12 +94,15 @@ object BeeResourceful : ModInitializer {
 
     fun registerFlavor(name: String, flavor: HoneyFlavor): HoneyFlavor {
         return Registry.register(BeeProductive.HONEY_FLAVORS, Identifier("beeresourceful", name), flavor).also {
-            it.registerNectar(name)  // Registers the item before we add the crafting recipe lol
+            it.registerNectar(name)
             registerRecipe(name, flavor)
         }
     }
 
     fun registerRecipe(name: String, flavor: HoneyFlavor) {
-        _InternalNectarRecipeConfiguration.flavors[name] = flavor
+        if (name.startsWith("potion_"))
+            RecipeCreator.potionFlavors[name] = flavor
+        else
+            RecipeCreator.flavors[name] = flavor
     }
 }
