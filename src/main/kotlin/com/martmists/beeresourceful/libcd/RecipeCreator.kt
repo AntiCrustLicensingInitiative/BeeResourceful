@@ -1,7 +1,6 @@
 package com.martmists.beeresourceful.libcd
 
 import io.github.alloffabric.beeproductive.api.HoneyFlavor
-import io.github.cottonmc.libcd.api.tweaker.TweakerManager
 import io.github.cottonmc.libcd.api.tweaker.recipe.RecipeTweaker
 import net.minecraft.inventory.CraftingInventory
 import net.minecraft.item.ItemStack
@@ -18,10 +17,6 @@ import net.minecraft.world.World
 object RecipeCreator {
     val flavors = mutableMapOf<String, HoneyFlavor>()
     val potionFlavors = mutableMapOf<String, HoneyFlavor>()
-
-    fun init() {
-        TweakerManager.INSTANCE.addAssistant("beeresourceful.libcd.RecipeCreator", this)
-    }
 
     fun ___registerRecipes() {
         flavors.forEach { (name, flavor) ->

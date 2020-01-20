@@ -69,7 +69,7 @@ dependencies {
 	// modRuntime "curse.maven:oysters:2854625"
 	// modRuntime "curse.maven:mobz:2853477"
 	// modRuntime "curse.maven:equipz:2844678"
-	// include "mcp.mobius.waila:Hwyla:${project.hwyla_version}"
+	// modRuntime "mcp.mobius.waila:Hwyla:${project.hwyla_version}"
 
 	// Kotlin
 	modImplementation "net.fabricmc:fabric-language-kotlin:$kotlin_version_old+build.1"

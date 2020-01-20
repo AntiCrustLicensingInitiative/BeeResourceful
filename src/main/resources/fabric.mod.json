@@ -18,13 +18,17 @@
         "value": "com.martmists.beeresourceful.BeeResourceful",
         "adapter": "kotlin"
       }
+    ],
+    "libcd": [
+      "com.martmists.beeresourceful.libcd.ModLibCDEntrypoint"
     ]
   },
   "custom": {
     "waila:plugins": {
       "id": "beeresourceful:bpdata_plugin",
       "initializer": "com.martmists.beeresourceful.waila.BPDataPlugin"
-    }
+    },
+    "modmenu:parent": "beeproductive"
   },
   "depends": {
     "fabricloader": ">=0.4.0",

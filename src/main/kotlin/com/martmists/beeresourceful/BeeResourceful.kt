@@ -2,7 +2,6 @@ package com.martmists.beeresourceful
 
 import com.martmists.beeresourceful.ext.registerItem
 import com.martmists.beeresourceful.ext.registerNectar
-import com.martmists.beeresourceful.libcd.CustomNectar
 import com.martmists.beeresourceful.libcd.RecipeCreator
 import com.martmists.beeresourceful.nectars.Potions
 import com.martmists.beeresourceful.nectars.Vanilla
@@ -24,7 +23,7 @@ import net.minecraft.util.registry.Registry
 import org.apache.logging.log4j.LogManager
 
 object BeeResourceful : ModInitializer {
-    private val logger = LogManager.getLogger("Bee Resourceful")
+    val logger = LogManager.getLogger("Bee Resourceful")
 
     override fun onInitialize() {
         logger.info("[Bee Resourceful] loading items...")
@@ -34,7 +33,6 @@ object BeeResourceful : ModInitializer {
 
         logger.info("[Bee Resourceful] Adding potions...")
         Potions.init()
-        RecipeCreator.init()
 
         if (FabricLoader.getInstance().environmentType == EnvType.CLIENT) {
             logger.info("[Bee Resourceful] Adding Artifice resources...")
@@ -69,16 +67,6 @@ object BeeResourceful : ModInitializer {
         if (FabricLoader.getInstance().isModLoaded("mobz")) {
             logger.info("[Bee Resourceful] Adding MobZ drops...")
             MobZ.init()
-        }
-
-        if (FabricLoader.getInstance().isModLoaded("libcd")) {
-            logger.info("[Bee Resourceful] Adding LibCD tweaker...")
-            CustomNectar.__register()
-            logger.warn(
-                    "NOTE: The LibCD tweaker adds the items to the registry! " +
-                            "If you create custom Nectars in one world, these will stay around " +
-                            "in others until you restart your game! " +
-                            "(This feature also may not work reliably on servers)")
         }
 
         logger.info("[Bee Resourceful] Done loading. Enjoy!")
